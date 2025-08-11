@@ -1,8 +1,10 @@
 import React from 'react'
 import { Dimensions, Image, ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { COLOR } from '../constant/Colors'
+import { useNavigation } from '@react-navigation/native'
 
 type productProps = {
+    id: number,
     name: string,
     image: ImageSourcePropType,
     price: number,
@@ -11,9 +13,13 @@ type productProps = {
 
 const width = Dimensions.get('screen').width
 
-const Card = ({ image, name, price, description }: productProps) => {
+const Card = ({ id, image, name, price, description }: productProps) => {
+
+    const navigation = useNavigation()
+
+
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity onPress={() => navigation.navigate("details", { product_id: id })} style={styles.container}>
             <Image style={styles.imageStyle} source={image} />
             <View style={styles.textContainer}>
                 <Text style={styles.mainTextStyle}>{name}</Text>
