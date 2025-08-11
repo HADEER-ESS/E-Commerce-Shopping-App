@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Products } from "../data/products";
-import { ProductsType } from "./productType";
+import { ProductsType } from "../data/productType";
 
 export default function homeController() {
     const [productArr, setProductArr] = useState<ProductsType[]>([])
