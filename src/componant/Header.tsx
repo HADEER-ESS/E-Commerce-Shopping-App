@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native'
 import React, { useState } from 'react'
 import { Image, StyleSheet, Switch, TouchableOpacity, View } from 'react-native'
 
@@ -6,6 +7,7 @@ type headerProps = {
 }
 
 const Header = ({ cartCount }: headerProps) => {
+    const navigation = useNavigation()
     const [isEnabled, setIsEnabled] = useState<boolean>(true);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     return (
@@ -18,8 +20,8 @@ const Header = ({ cartCount }: headerProps) => {
                 onValueChange={toggleSwitch}
                 value={isEnabled}
             />
-            {/* Cart */}
-            <TouchableOpacity>
+            {/* Cart  with badge to display the count of selected item*/}
+            <TouchableOpacity onPress={() => navigation.navigate("cart")}>
                 <Image style={styles.imageStyle} source={require("../../assets/products/cart.png")} />
             </TouchableOpacity>
         </View>
