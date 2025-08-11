@@ -1,0 +1,66 @@
+import React from 'react'
+import { Dimensions, Image, ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { COLOR } from '../constant/Colors'
+
+type productProps = {
+    name: string,
+    image: ImageSourcePropType,
+    price: number,
+    description: string
+}
+
+const width = Dimensions.get('screen').width
+
+const Card = ({ image, name, price, description }: productProps) => {
+    return (
+        <TouchableOpacity style={styles.container}>
+            <Image style={styles.imageStyle} source={image} />
+            <View style={styles.textContainer}>
+                <Text style={styles.mainTextStyle}>{name}</Text>
+                <Text style={styles.subTextStyle}>{price} - EGP</Text>
+            </View>
+            <Text style={styles.subTextStyle}>
+                {description}
+            </Text>
+        </TouchableOpacity>
+    )
+}
+
+export default Card
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        marginHorizontal: width * 0.1,
+        padding: 10,
+        backgroundColor: COLOR.light.background,
+        borderRadius: 8,
+        marginBottom: 10,
+        borderWidth: 2,
+        borderColor: COLOR.light.borderColor
+    },
+    imageStyle: {
+        width: "100%",
+        height: width * 0.5,
+        resizeMode: "contain",
+        borderRadius: 8,
+    },
+    textContainer: {
+        marginTop: 16,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 12
+
+    },
+    mainTextStyle: {
+        textAlign: 'center',
+        fontSize: 24,
+        color: COLOR.light.mainText
+    },
+    subTextStyle: {
+        fontSize: 16,
+        color: COLOR.light.subText,
+        paddingStart: 12
+    }
+})
