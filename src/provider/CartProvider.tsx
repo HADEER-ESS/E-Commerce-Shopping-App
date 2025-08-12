@@ -3,7 +3,7 @@ import React, { createContext, ReactNode, useContext, useState } from 'react'
 import { ImageSourcePropType } from 'react-native'
 import { Products } from '../data/products'
 
-type CartProductItem = {
+export type CartProductItem = {
     id: number,
     image: ImageSourcePropType,
     name: string | undefined,
@@ -113,8 +113,8 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
         }
 
         await saveItemToCart(cart)
-        await getCartScreenData()
         await isExistProduct(productId)
+        await getCartScreenData()
     };
 
 
@@ -132,8 +132,8 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
         }
 
         await saveItemToCart(cart)
-        await getCartScreenData()
         await isExistProduct(productId)
+        await getCartScreenData()
     }
 
     //Act in Buy behavior 

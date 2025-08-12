@@ -2,8 +2,7 @@ import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import UpdateCountBtn from './UpdateCountBtn'
 import { COLOR } from '../constant/Colors'
-import { CartProductItem } from '../controller/cartScreenController'
-import { useCart } from '../provider/CartProvider'
+import { CartProductItem, useCart } from '../provider/CartProvider'
 
 type CartCardProductProps = {
     product: CartProductItem
@@ -14,6 +13,7 @@ const CartCardProduct = ({ product }: CartCardProductProps) => {
     const { id, name, image, price, quantity } = product
     const { incrementAddCartItem, decrementRemoveCartItem, singleProductCount } = useCart()
 
+
     return (
         <View style={styles.cartCardContainer}>
             <Image style={styles.cartImage} source={image} />
@@ -22,7 +22,7 @@ const CartCardProduct = ({ product }: CartCardProductProps) => {
                 <Text style={styles.cartPriceStyle}>{price} EGP</Text>
             </View>
             <UpdateCountBtn
-                count={singleProductCount > 0 ? singleProductCount : quantity}
+                count={quantity}
                 increment={() =>
                     incrementAddCartItem(id)
                 }
