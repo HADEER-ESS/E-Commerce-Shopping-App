@@ -2,6 +2,7 @@ import React from 'react'
 import { Dimensions, Image, ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { COLOR } from '../constant/Colors'
 import { useNavigation } from '@react-navigation/native'
+import { useTheme } from '../provider/ThemeProvider'
 
 type productProps = {
     id: number,
@@ -14,7 +15,7 @@ type productProps = {
 const width = Dimensions.get('screen').width
 
 const Card = ({ id, image, name, price, description }: productProps) => {
-
+    const { theme } = useTheme()
     const navigation = useNavigation()
 
 
