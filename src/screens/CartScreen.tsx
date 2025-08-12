@@ -1,24 +1,52 @@
 import React from 'react'
-import { View } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import MainStyles from '../constant/styles'
+import CartCardProduct from '../componant/CartCardProduct'
+import ActionBtn from '../componant/ActionBtn'
+import { useNavigation } from '@react-navigation/native'
+import { useCart } from '../provider/CartProvider'
 
 const CartScreen = () => {
+
+    const { clearCartData, cartData, totalProductCount, totalProductPrice } = useCart()
+    const navigation = useNavigation()
+
+    function handleClearCart() {
+        clearCartData()
+        navigation.goBack()
+    }
+    console.warn("cart display data ", cartData)
+
     return (
         <View style={MainStyles.screenContainer}>
-            {/* Card with
-            image       name / price        - 1 + (btn)
-            */}
-            {/* 
-            Payment Details
-            total items : 
-            total amound : 
-            */}
-
-            {/* Two Buttons options render horizontally */}
-            {/* Add items  => navigate to home screen*/}
-            {/* checkout => reset the sored data and show toast for success */}
+            <FlatList
+                data={cartData}
+                keyExtractor={(item) => `${item?.name} ${item?.id}`}
+                renderItem={({ item, index }) => <CartCardProduct product={item} />}
+            />
+            <View style={styles.staticSectionContainer}>
+                <Text style={MainStyles.MainTitleStle}>Total Items : {totalProductCount}</Text>
+                <Text style={MainStyles.MainTitleStle}>Total Price : {totalProductPrice} EGP</Text>
+                <View style={styles.actionBtnContainer}>
+                    <ActionBtn text={"Add items"} fun={() => navigation.goBack()} />
+                    <ActionBtn text={"Buy now"} fun={handleClearCart} />
+                </View>
+            </View>
         </View>
     )
 }
 
 export default CartScreen
+
+const styles = StyleSheet.create({
+    staticSectionContainer: {
+        marginVertical: 12,
+        paddingHorizontal: 24
+    },
+    actionBtnContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginVertical: 16,
+    }
+})
