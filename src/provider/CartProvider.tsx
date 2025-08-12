@@ -34,7 +34,10 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     const [totalProductPrice, setTotalProductPrice] = useState<number>(0)
 
 
-    // Helper functions interact directly with AsyncStorage
+    // Helper functions (1,2) interact directly with AsyncStorage
+
+    //function that save data in AsyncStorage as 2D array form from Map
+    //saved data (id, quantity) to minimalize state, and keep it up to date when dispatch remains later.
     const loadProductData = async (): Promise<Map<number, number>> => {
         try {
             const data = await AsyncStorage.getItem("cartItems")
@@ -51,6 +54,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
         }
     }
 
+    //get data from Storage in Map form
     const saveItemToCart = async (cartMap: Map<number, number>) => {
         try {
             const cartArray = Array.from(cartMap.entries())
@@ -67,6 +71,8 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
         setSingleProductCount(cart.get(id) || 0)
     }
 
+    //fuction to get cart product data to be display in Cart screen
+    // update TOTAL (count, price) for products
     const getCartScreenData = async () => {
         const cartMap = await loadProductData()
         const arrayData: number[][] = Array.from(cartMap.entries()) //[[id, count]]
@@ -87,13 +93,16 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
             }
             products.push(cartItem)
         }
-        console.warn("new items count ", totalCount, "\n total price ", totalPrice)
 
         setTotalProductCount(totalCount)
         setTotalProductPrice(totalPrice)
         setCartData(products)
     }
 
+
+    //function to check if item is already exist in Cart or not
+    //if YES => increment count
+    //if NO => set new item with quantity 1
     const incrementAddCartItem = async (productId: number) => {
         const cart = await loadProductData()
 
@@ -108,6 +117,9 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
         await isExistProduct(productId)
     };
 
+
+    //function to check if item is already exist in Cart or not
+    //if YES => decrement count or delete
     const decrementRemoveCartItem = async (productId: number) => {
         const cart = await loadProductData()
 
@@ -124,6 +136,8 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
         await isExistProduct(productId)
     }
 
+    //Act in Buy behavior 
+    //Show Toast for Success (TODO)
     const clearCartData = async () => {
         await AsyncStorage.removeItem("cartItems")
         await getCartScreenData()
