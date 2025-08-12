@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import UpdateCountBtn from './UpdateCountBtn'
 import { COLOR } from '../constant/Colors'
 import { CartProductItem, useCart } from '../provider/CartProvider'
+import { useTheme } from '../provider/ThemeProvider'
 
 type CartCardProductProps = {
     product: CartProductItem
@@ -11,15 +12,16 @@ type CartCardProductProps = {
 
 const CartCardProduct = ({ product }: CartCardProductProps) => {
     const { id, name, image, price, quantity } = product
-    const { incrementAddCartItem, decrementRemoveCartItem, singleProductCount } = useCart()
+    const { incrementAddCartItem, decrementRemoveCartItem } = useCart()
+    const { theme } = useTheme()
 
 
     return (
-        <View style={styles.cartCardContainer}>
+        <View style={[styles.cartCardContainer, { backgroundColor: theme.white, borderColor: theme.primary }]}>
             <Image style={styles.cartImage} source={image} />
             <View style={styles.cartTextContainer}>
-                <Text style={styles.cartNameStyle}>{name}</Text>
-                <Text style={styles.cartPriceStyle}>{price} EGP</Text>
+                <Text style={[styles.cartNameStyle, { color: theme.black }]}>{name}</Text>
+                <Text style={[styles.cartPriceStyle, { color: theme.secondry }]}>{price} EGP</Text>
             </View>
             <UpdateCountBtn
                 count={quantity}
@@ -41,10 +43,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
-        backgroundColor: COLOR.light.background,
         borderRadius: 12,
         borderWidth: 2,
-        borderColor: COLOR.light.borderColor,
         paddingHorizontal: 12,
         paddingVertical: 16,
         marginHorizontal: 8,
@@ -62,10 +62,8 @@ const styles = StyleSheet.create({
     cartNameStyle: {
         fontSize: 18,
         fontWeight: 'bold',
-        color: COLOR.light.mainText
     },
     cartPriceStyle: {
         fontSize: 16,
-        color: COLOR.light.subText
     },
 })

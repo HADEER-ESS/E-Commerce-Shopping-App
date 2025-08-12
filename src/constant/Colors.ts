@@ -1,14 +1,16 @@
 export const COLOR = {
     light: {
-        background: "#ffffff",
-        mainText: "#000000",
-        subText: "#666",
+        white: "#ffffff",
+        black: "#000000",
+        primary: "#b19cd9",
+        secondry: " #4d4d4d",
         borderColor: "#d0c4f7"
     },
     dark: {
-        background: "#0f0f1a",
-        mainText: "#ffffff",
-        subText: "#b19cd9",
+        white: "#0f0f1a",
+        black: "#ffffff",
+        primary: "#b19cd9",
+        secondry: "#d4d4d4",
         borderColor: "#3b2f5c"
     }
 }

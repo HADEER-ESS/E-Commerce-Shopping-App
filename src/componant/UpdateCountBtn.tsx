@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { COLOR } from '../constant/Colors'
+import { useTheme } from '../provider/ThemeProvider'
 
 
 type props = {
@@ -11,17 +12,17 @@ type props = {
 
 
 const UpdateCountBtn = ({ count, increment, decrement }: props) => {
-
+    const { theme } = useTheme()
 
     return (
-        <View style={styles.dynamicBtnContainer}>
+        <View style={[styles.dynamicBtnContainer, { backgroundColor: theme.white, borderColor: theme.primary }]}>
             <Text
                 onPress={decrement}
-                style={styles.actionTextStyle}
+                style={[styles.actionTextStyle, { color: theme.primary }]}
             >-</Text>
-            <Text style={styles.displayTextStyle}>{count}</Text>
+            <Text style={[styles.displayTextStyle, { color: theme.primary }]}>{count}</Text>
             <Text
-                style={styles.actionTextStyle}
+                style={[styles.actionTextStyle, { color: theme.primary }]}
                 onPress={increment}
             >+</Text>
         </View>
@@ -38,19 +39,15 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 16,
         borderRadius: 14,
-        backgroundColor: COLOR.light.background,
         borderWidth: 1.5,
-        borderColor: COLOR.light.borderColor,
         width: '35%'
     },
     actionTextStyle: {
-        color: COLOR.light.borderColor,
         fontSize: 14,
         fontWeight: 'bold',
         textAlign: 'center'
     },
     displayTextStyle: {
-        color: COLOR.light.borderColor,
         fontSize: 16,
         textAlign: 'center'
     }

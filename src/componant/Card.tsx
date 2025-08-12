@@ -20,13 +20,16 @@ const Card = ({ id, image, name, price, description }: productProps) => {
 
 
     return (
-        <TouchableOpacity onPress={() => navigation.navigate("details", { product_id: id })} style={styles.container}>
+        <TouchableOpacity
+            onPress={() => navigation.navigate("details", { product_id: id })}
+            style={[styles.container, { backgroundColor: theme.white, borderColor: theme.primary }]}
+        >
             <Image style={styles.imageStyle} source={image} />
             <View style={styles.textContainer}>
-                <Text style={styles.mainTextStyle}>{name}</Text>
-                <Text style={styles.subTextStyle}>{price} - EGP</Text>
+                <Text style={[styles.mainTextStyle, { color: theme.black }]}>{name}</Text>
+                <Text style={[styles.subTextStyle, { color: theme.secondry }]}>{price} - EGP</Text>
             </View>
-            <Text style={styles.subTextStyle}>
+            <Text style={[styles.subTextStyle, { color: theme.secondry }]}>
                 {description}
             </Text>
         </TouchableOpacity>
@@ -40,11 +43,9 @@ const styles = StyleSheet.create({
         flex: 1,
         marginHorizontal: width * 0.1,
         padding: 10,
-        backgroundColor: COLOR.light.background,
         borderRadius: 8,
         marginBottom: 10,
         borderWidth: 2,
-        borderColor: COLOR.light.borderColor
     },
     imageStyle: {
         width: "100%",
@@ -63,11 +64,9 @@ const styles = StyleSheet.create({
     mainTextStyle: {
         textAlign: 'center',
         fontSize: 24,
-        color: COLOR.light.mainText
     },
     subTextStyle: {
         fontSize: 16,
-        color: COLOR.light.subText,
         paddingStart: 12
     }
 })

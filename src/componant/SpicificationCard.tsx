@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
-import MainStyles from '../constant/styles'
-import { COLOR } from '../constant/Colors'
+import { createGlobalStyle } from '../constant/styles'
+import { useTheme } from '../provider/ThemeProvider'
 
 type props = {
     label: string,
@@ -14,10 +14,11 @@ const itemMargin = 8;
 
 const itemWidth = (screenWidth - itemMargin * (numColumns + 1)) / numColumns;
 const SpicificationCard = ({ label, value }: props) => {
-
+    const { theme } = useTheme()
+    const MainStyles = createGlobalStyle(theme)
 
     return (
-        <View style={styles.cardView}>
+        <View style={[styles.cardView, { borderColor: theme.primary }]}>
             <Text style={MainStyles.SubTextStyle}>{label} :</Text>
             <Text style={MainStyles.SubTextStyle}>{value}</Text>
         </View>
@@ -32,7 +33,6 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         margin: itemMargin / 2,
         borderRadius: 12,
-        borderColor: COLOR.light.borderColor,
         borderWidth: 2,
         padding: 6,
         width: itemWidth,

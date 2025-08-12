@@ -1,15 +1,18 @@
 import React from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
-import MainStyles from '../constant/styles'
+import { createGlobalStyle } from '../constant/styles'
 import CartCardProduct from '../componant/CartCardProduct'
 import ActionBtn from '../componant/ActionBtn'
 import { useNavigation } from '@react-navigation/native'
 import { useCart } from '../provider/CartProvider'
+import { useTheme } from '../provider/ThemeProvider'
 
 const CartScreen = () => {
 
     const { clearCartData, cartData, totalProductCount, totalProductPrice } = useCart()
     const navigation = useNavigation()
+    const { theme } = useTheme()
+    const MainStyles = createGlobalStyle(theme)
 
     function handleClearCart() {
         clearCartData()

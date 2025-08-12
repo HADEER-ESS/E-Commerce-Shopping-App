@@ -3,10 +3,14 @@ import { FlatList, RefreshControl, View } from 'react-native'
 import Card from '../componant/Card'
 import Header from '../componant/Header'
 import homeController from '../controller/homeController'
-import MainStyles from '../constant/styles'
+import { createGlobalStyle } from '../constant/styles'
+import { useTheme } from '../provider/ThemeProvider'
 
 const HomeScreen = () => {
     const { productArr, refreshing, pullToRefreshProducts } = homeController()
+    const { theme } = useTheme()
+    const MainStyles = createGlobalStyle(theme)
+
     return (
         <View style={MainStyles.screenContainer}>
             <Header cartCount={0} />

@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import { Dimensions, FlatList, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { Products } from '../data/products'
-import MainStyles from '../constant/styles'
+import { createGlobalStyle } from '../constant/styles'
 import { COLOR } from '../constant/Colors'
 import SpicificationCard from '../componant/SpicificationCard'
 import UpdateCountBtn from '../componant/UpdateCountBtn'
 import ActionBtn from '../componant/ActionBtn'
 import { useCart } from '../provider/CartProvider'
+import { useTheme } from '../provider/ThemeProvider'
 
 const width = Dimensions.get("screen").width
 
@@ -15,6 +16,8 @@ const DetailsScreen = ({ route }: any) => {
     const { product_id } = route.params
     const product = Products.find((pro) => pro.id === product_id)
     const { isExistProduct, isProductExist, singleProductCount, incrementAddCartItem, decrementRemoveCartItem } = useCart()
+    const { theme } = useTheme()
+    const MainStyles = createGlobalStyle(theme)
 
     useEffect(() => { isExistProduct(product_id) }, [])
 
@@ -27,7 +30,7 @@ const DetailsScreen = ({ route }: any) => {
                 keyExtractor={(_, index) => `item num ${index}`}
                 renderItem={({ item }) => <Image style={styles.imageStyle} source={item} />}
             />
-            <View style={styles.whiteDescContainer}>
+            <View style={[styles.whiteDescContainer, { backgroundColor: theme.white }]}>
                 <Text style={[MainStyles.MainTitleStle, { marginVertical: 16, width: '95%' }]}>{product?.name}</Text>
                 <View style={{ flex: 1, }}>
                     <FlatList
@@ -39,7 +42,7 @@ const DetailsScreen = ({ route }: any) => {
                     />
                 </View>
 
-                <Text style={styles.descriptonStyle}>{product?.details_desc}</Text>
+                <Text style={[styles.descriptonStyle, { color: theme.primary }]}>{product?.details_desc}</Text>
                 <View style={styles.priceAddConatinerView}>
                     <Text style={MainStyles.MainTitleStle}>Price : {product?.price} EGP</Text>
                     {
@@ -63,7 +66,6 @@ export default DetailsScreen
 
 const styles = StyleSheet.create({
     whiteDescContainer: {
-        backgroundColor: COLOR.light.background,
         paddingVertical: 12,
         borderTopStartRadius: 12,
         borderTopEndRadius: 12,
@@ -79,7 +81,6 @@ const styles = StyleSheet.create({
         marginVertical: 16,
         fontSize: 16,
         lineHeight: 28,
-        color: COLOR.light.subText,
         paddingHorizontal: 8
     },
     priceAddConatinerView: {
@@ -89,18 +90,4 @@ const styles = StyleSheet.create({
         marginVertical: 16,
         width: '90%',
     },
-    addBtnStyle: {
-        backgroundColor: COLOR.light.borderColor,
-        paddingVertical: 12,
-        paddingHorizontal: 16,
-        borderRadius: 24,
-        width: '35%'
-    },
-    addBtnTextStyle: {
-        color: COLOR.light.background,
-        fontSize: 14,
-        textAlign: 'center',
-        fontWeight: 'bold'
-
-    }
 })
