@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, ToastAndroid, View } from 'react-native'
 import { createGlobalStyle } from '../constant/styles'
 import CartCardProduct from '../componant/CartCardProduct'
 import ActionBtn from '../componant/ActionBtn'
@@ -17,7 +17,11 @@ const CartScreen = () => {
 
     function handleClearCart() {
         clearCartData()
-        navigation.goBack()
+        ToastAndroid.show("Thanks for choosing us", ToastAndroid.SHORT)
+        setTimeout(() => {
+            navigation.goBack()
+        }, 300)
+
     }
     console.warn("cart display data ", cartData)
 
