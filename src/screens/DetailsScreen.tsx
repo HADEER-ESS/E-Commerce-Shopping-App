@@ -57,7 +57,7 @@ const DetailsScreen = ({ route }: screenProps) => {
                     />
                 </View>
 
-                <Text style={[styles.descriptonStyle, { color: theme.primary }]}>{product?.details_desc}</Text>
+                <Text style={[styles.descriptonStyle, { color: theme.secondry }]}>{product?.details_desc}</Text>
                 <View style={styles.priceAddConatinerView}>
                     <Text style={MainStyles.MainTitleStle}>Price : {product?.price} EGP</Text>
                     {

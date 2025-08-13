@@ -15,6 +15,7 @@ type productProps = {
 }
 
 const width = Dimensions.get('screen').width
+const ITEM_WIDTH = (width / 2) - 16
 type HomeNavigationProp = NativeStackNavigationProp<RootStackParamList, 'home_catalog'>
 
 const Card = ({ id, image, name, price, description }: productProps) => {
@@ -28,11 +29,9 @@ const Card = ({ id, image, name, price, description }: productProps) => {
             style={[styles.container, { backgroundColor: theme.white, borderColor: theme.primary }]}
         >
             <Image style={styles.imageStyle} source={image} />
-            <View style={styles.textContainer}>
-                <Text style={[styles.mainTextStyle, { color: theme.black }]}>{name}</Text>
-                <Text style={[styles.subTextStyle, { color: theme.secondry }]}>{price} - EGP</Text>
-            </View>
-            <Text style={[styles.subTextStyle, { color: theme.secondry }]}>
+            <Text style={[styles.mainTextStyle, { color: theme.black }]}>{name}</Text>
+            <Text style={[styles.subTextStyle, { color: theme.secondry }]}>{price} - EGP</Text>
+            <Text numberOfLines={2} ellipsizeMode='tail' style={[styles.subTextStyle, { color: theme.secondry }]}>
                 {description}
             </Text>
         </TouchableOpacity>
@@ -43,33 +42,24 @@ export default Card
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        marginHorizontal: width * 0.1,
+        width: ITEM_WIDTH,
         padding: 10,
-        borderRadius: 8,
-        marginBottom: 10,
+        borderRadius: 10,
+        margin: 4,
         borderWidth: 2,
     },
     imageStyle: {
         width: "100%",
-        height: width * 0.5,
+        height: width * 0.4,
         resizeMode: "contain",
         borderRadius: 8,
     },
-    textContainer: {
-        marginTop: 16,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: 12
-
-    },
     mainTextStyle: {
-        textAlign: 'center',
-        fontSize: 24,
+        fontSize: 18,
+        marginVertical: 4
     },
     subTextStyle: {
         fontSize: 16,
-        paddingStart: 12
+        marginVertical: 4
     }
 })

@@ -19,6 +19,8 @@ const HomeScreen = () => {
             <FlatList
                 keyExtractor={(item) => `item no-${item.id}`}
                 data={productArr}
+                numColumns={2}
+                contentContainerStyle={{ padding: 8 }}
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={pullToRefreshProducts} />}
                 renderItem={({ item }) => <Card id={item.id} image={item.images[0]} name={item.name} price={item.price} description={item.description} />}
             />
