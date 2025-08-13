@@ -8,8 +8,9 @@ type CarouselProps = {
     imagesData: ImageSourcePropType[]
 }
 
-const ProductCarousel = ({ imagesData }: CarouselProps) => {
+const ProductCarousel = React.memo(({ imagesData }: CarouselProps) => {
     const { carouselRef, currentImageIndex } = detailsController(imagesData)
+
     const { theme } = useTheme()
     return (
         <>
@@ -28,7 +29,7 @@ const ProductCarousel = ({ imagesData }: CarouselProps) => {
             </View>
         </>
     )
-}
+})
 
 export default ProductCarousel
 

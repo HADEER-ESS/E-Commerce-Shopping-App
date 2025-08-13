@@ -17,7 +17,7 @@ type productProps = {
 const ITEM_WIDTH = (width / 2) - 16
 type HomeNavigationProp = NativeStackNavigationProp<RootStackParamList, 'home_catalog'>
 
-const Card = ({ id, image, name, price, description }: productProps) => {
+const Card = React.memo(({ id, image, name, price, description }: productProps) => {
     const { theme } = useTheme()
     const navigation = useNavigation<HomeNavigationProp>()
 
@@ -35,7 +35,7 @@ const Card = ({ id, image, name, price, description }: productProps) => {
             </Text>
         </TouchableOpacity>
     )
-}
+})
 
 export default Card
 

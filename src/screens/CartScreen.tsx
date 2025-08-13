@@ -23,7 +23,6 @@ const CartScreen = () => {
         }, 300)
 
     }
-    console.warn("cart display data ", cartData)
 
     return (
         <View style={MainStyles.screenContainer}>

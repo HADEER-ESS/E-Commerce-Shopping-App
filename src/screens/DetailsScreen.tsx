@@ -26,7 +26,6 @@ const DetailsScreen = ({ route }: screenProps) => {
     const { isExistProduct, isProductExist, singleProductCount, incrementAddCartItem, decrementRemoveCartItem } = useCart()
     const { theme } = useTheme()
     const MainStyles = createGlobalStyle(theme)
-    console.warn("single product count now ", singleProductCount)
 
     useEffect(() => { isExistProduct(product_id) }, [])
 
