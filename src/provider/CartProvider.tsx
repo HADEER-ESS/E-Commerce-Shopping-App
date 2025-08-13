@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import React, { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react'
 import { ImageSourcePropType } from 'react-native'
 import { Products } from '../data/products'
 
@@ -28,14 +28,47 @@ const CartContext = createContext<cartContextDataType | undefined>(undefined)
 
 const CartProvider = ({ children }: { children: ReactNode }) => {
     const [cartData, setCartData] = useState<CartProductItem[]>([])
+    const [cartMap, setCartMap] = useState<Map<number, number>>(new Map())
     const [isProductExist, setIsProductExist] = useState<boolean>(false)
     const [singleProductCount, setSingleProductCount] = useState<number>(0)
     const [totalProductCount, setTotalProductCount] = useState<number>(0)
     const [totalProductPrice, setTotalProductPrice] = useState<number>(0)
 
+    const productsMap = useMemo(() => new Map(Products.map(pro => [pro.id, pro])), [])
+
     useEffect(() => {
-        getCartScreenData()
+        loadProductData().then(product => {
+            setCartMap(product)
+            getCartScreenData(product)
+        })
     }, [])
+
+    //fuction to get cart product data to be display in Cart screen
+    // update TOTAL (count, price) for products
+    const getCartScreenData = (cartData: Map<number, number>) => {
+        let totalPrice = 0
+        let totalCount = 0
+        let products: CartProductItem[] = []
+
+        for (let [id, count] of cartData.entries()) {
+            const product = productsMap.get(id)
+            if (!product) continue
+
+            totalCount += count
+            totalPrice += product.price * count
+            products.push({
+                id,
+                image: product.images[0],
+                name: product.name,
+                price: product.price,
+                quantity: count
+            })
+        }
+
+        setTotalProductCount(totalCount)
+        setTotalProductPrice(totalPrice)
+        setCartData(products)
+    }
 
 
     // Helper functions (1,2) interact directly with AsyncStorage
@@ -70,64 +103,37 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const isExistProduct = async (id: number) => {
-        const cart = await loadProductData()
-        setIsProductExist(cart.has(id))
-        setSingleProductCount(cart.get(id) || 0)
+        setIsProductExist(cartMap.has(id))
+        setSingleProductCount(cartMap.get(id) || 0)
     }
-
-    //fuction to get cart product data to be display in Cart screen
-    // update TOTAL (count, price) for products
-    const getCartScreenData = async () => {
-        const cartMap = await loadProductData()
-        const arrayData: number[][] = Array.from(cartMap.entries()) //[[id, count]]
-        let totalPrice = 0
-        let totalCount = 0
-        let products = []
-
-        for (let [id, count] of arrayData) {
-            let product = Products.find((pro) => pro.id === id)
-            totalCount += count
-            totalPrice += (product?.price!! * count)
-            let cartItem = {
-                id: id,
-                image: product?.images[0],
-                name: product?.name,
-                price: product?.price,
-                quantity: count
-            }
-            products.push(cartItem)
-        }
-
-        setTotalProductCount(totalCount)
-        setTotalProductPrice(totalPrice)
-        setCartData(products)
-    }
-
 
     //function to check if item is already exist in Cart or not
     //if YES => increment count
     //if NO => set new item with quantity 1
     const incrementAddCartItem = async (productId: number) => {
-        const cart = await loadProductData()
-
+        const cart = new Map(cartMap)
+        // cart.set(productId, (cart.get(productId) || 0) + 1)
         if (!cart.has(productId)) {
             cart.set(productId, 1)
-        } else {
+        }
+        else {
             cart.set(productId, cart.get(productId)! + 1)
         }
 
+        setCartMap(cart)
+        getCartScreenData(cart)
+        setIsProductExist(true)
+        setSingleProductCount(cart.get(productId)!!)
         await saveItemToCart(cart)
-        await isExistProduct(productId)
-        await getCartScreenData()
     };
 
 
     //function to check if item is already exist in Cart or not
     //if YES => decrement count or delete
     const decrementRemoveCartItem = async (productId: number) => {
-        const cart = await loadProductData()
+        const cart = new Map(cartMap)
 
-        if (cart.get(productId)!! > 1) {
+        if ((cart.get(productId) || 0) > 1) {
             cart.set(productId, cart.get(productId)! - 1)
         }
         else {
@@ -135,18 +141,20 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
             cart.delete(productId)
         }
 
+        setCartMap(cart)
+        getCartScreenData(cart)
+        setIsProductExist(cart.has(productId))
+        setSingleProductCount(cart.get(productId)!!)
         await saveItemToCart(cart)
-        await isExistProduct(productId)
-        await getCartScreenData()
     }
 
     //Act in Buy behavior 
     //Show Toast for Success (TODO)
     const clearCartData = async () => {
+        const emptyCart = new Map()
+        setCartMap(emptyCart)
+        getCartScreenData(emptyCart)
         await AsyncStorage.removeItem("cartItems")
-        await getCartScreenData()
-        setTotalProductCount(0)
-        setTotalProductPrice(0)
     }
 
 
@@ -165,6 +173,6 @@ export default CartProvider
 export const useCart = () => {
     const context = useContext(CartContext)
 
-    if (!context) throw new Error("useCart must be used within a CartProvider");
-    return context;
+    if (!context) throw new Error("useCart must be used within a CartProvider")
+    return context
 }
