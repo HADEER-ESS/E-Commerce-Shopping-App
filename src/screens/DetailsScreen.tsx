@@ -10,6 +10,7 @@ import { useCart } from '../provider/CartProvider'
 import { useTheme } from '../provider/ThemeProvider'
 import { RouteProp } from '@react-navigation/native'
 import { RootStackParamList } from '../stacks/RootStack'
+import detailsController from '../controller/detailsController'
 
 const width = Dimensions.get("screen").width
 type DetailsRouteParam = RouteProp<RootStackParamList, 'details'>
@@ -22,6 +23,7 @@ type screenProps = {
 const DetailsScreen = ({ route }: screenProps) => {
     const { product_id } = route.params
     const product = Products.find((pro) => pro.id === product_id)
+    const { carouselRef, currentImageIndex } = detailsController(product?.images!!)
     const { isExistProduct, isProductExist, singleProductCount, incrementAddCartItem, decrementRemoveCartItem } = useCart()
     const { theme } = useTheme()
     const MainStyles = createGlobalStyle(theme)
@@ -31,13 +33,19 @@ const DetailsScreen = ({ route }: screenProps) => {
     return (
         <ScrollView style={MainStyles.screenContainer}>
             <FlatList
-                horizontal={true}
+                horizontal
                 data={product?.images}
+                ref={carouselRef}
                 showsHorizontalScrollIndicator={false}
+                decelerationRate={'fast'}
+                pagingEnabled
                 keyExtractor={(_, index) => `item num ${index}`}
                 renderItem={({ item }) => <Image style={styles.imageStyle} source={item} />}
             />
             <View style={[styles.whiteDescContainer, { backgroundColor: theme.white }]}>
+                <View style={[styles.carouselIndicatorContainer, { backgroundColor: theme.white, borderColor: theme.primary }]}>
+                    <Text style={[styles.carouselTextStyle, { color: theme.black }]}>{currentImageIndex + 1} / {product?.images.length}</Text>
+                </View>
                 <Text style={[MainStyles.MainTitleStle, { marginVertical: 16, width: '95%' }]}>{product?.name}</Text>
                 <View style={{ flex: 1, }}>
                     <FlatList
@@ -97,4 +105,13 @@ const styles = StyleSheet.create({
         marginVertical: 16,
         width: '90%',
     },
+    carouselIndicatorContainer: {
+        borderRadius: 20,
+        paddingVertical: 4,
+        paddingHorizontal: 14,
+        borderWidth: 2
+    },
+    carouselTextStyle: {
+        fontSize: 14
+    }
 })
