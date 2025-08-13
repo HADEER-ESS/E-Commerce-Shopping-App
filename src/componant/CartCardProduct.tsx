@@ -4,6 +4,7 @@ import UpdateCountBtn from './UpdateCountBtn'
 import { COLOR } from '../constant/Colors'
 import { CartProductItem, useCart } from '../provider/CartProvider'
 import { useTheme } from '../provider/ThemeProvider'
+import { width } from '../constant/styles'
 
 type CartCardProductProps = {
     product: CartProductItem
@@ -51,9 +52,10 @@ const styles = StyleSheet.create({
         marginVertical: 6
     },
     cartImage: {
-        width: 85,
-        height: 75,
+        width: width * 0.18,
+        height: width * 0.22,
         resizeMode: 'contain',
+        alignSelf: 'center'
     },
     cartTextContainer: {
         flexDirection: 'column',

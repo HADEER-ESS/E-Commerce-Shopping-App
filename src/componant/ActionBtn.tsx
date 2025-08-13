@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { COLOR } from '../constant/Colors'
 import { useTheme } from '../provider/ThemeProvider'
+import { width } from '../constant/styles'
 
 type ActionBtnProp = {
     text: string,
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 16,
         borderRadius: 24,
-        width: '35%'
+        width: width * 0.35
     },
     actionTextStyle: {
         fontSize: 14,

@@ -1,13 +1,12 @@
 import React from 'react'
-import { Dimensions, FlatList, Image, ImageSourcePropType, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Image, ImageSourcePropType, StyleSheet, Text, View } from 'react-native'
 import detailsController from '../controller/detailsController'
 import { useTheme } from '../provider/ThemeProvider'
+import { width } from '../constant/styles'
 
 type CarouselProps = {
     imagesData: ImageSourcePropType[]
 }
-
-const width = Dimensions.get("screen").width
 
 const ProductCarousel = ({ imagesData }: CarouselProps) => {
     const { carouselRef, currentImageIndex } = detailsController(imagesData)

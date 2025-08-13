@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { ThemeType } from "./Colors";
 
 export const createGlobalStyle = (theme: ThemeType) => {
@@ -19,3 +19,5 @@ export const createGlobalStyle = (theme: ThemeType) => {
         }
     })
 }
+
+export const width = Dimensions.get('screen').width

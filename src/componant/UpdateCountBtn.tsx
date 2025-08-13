@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { COLOR } from '../constant/Colors'
 import { useTheme } from '../provider/ThemeProvider'
+import { width } from '../constant/styles'
 
 
 type props = {
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         borderRadius: 14,
         borderWidth: 1.5,
-        width: '35%'
+        width: width * 0.35
     },
     actionTextStyle: {
         fontSize: 14,

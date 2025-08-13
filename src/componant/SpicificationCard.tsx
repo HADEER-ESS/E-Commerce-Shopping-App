@@ -1,6 +1,6 @@
 import React from 'react'
-import { Dimensions, StyleSheet, Text, View } from 'react-native'
-import { createGlobalStyle } from '../constant/styles'
+import { StyleSheet, Text, View } from 'react-native'
+import { createGlobalStyle, width } from '../constant/styles'
 import { useTheme } from '../provider/ThemeProvider'
 
 type props = {
@@ -8,11 +8,10 @@ type props = {
     value: string
 }
 
-const screenWidth = Dimensions.get('window').width;
 const numColumns = 2;
 const itemMargin = 8;
 
-const itemWidth = (screenWidth - itemMargin * (numColumns + 1)) / numColumns;
+const itemWidth = (width - itemMargin * (numColumns + 1)) / numColumns;
 const SpicificationCard = ({ label, value }: props) => {
     const { theme } = useTheme()
     const MainStyles = createGlobalStyle(theme)

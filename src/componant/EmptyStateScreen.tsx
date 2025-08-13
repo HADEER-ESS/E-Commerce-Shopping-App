@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import { useTheme } from '../provider/ThemeProvider'
 import ActionBtn from './ActionBtn'
 import { useNavigation } from '@react-navigation/native'
+import { width } from '../constant/styles'
 
 const EmptyStateScreen = () => {
     const { theme } = useTheme()
@@ -28,8 +29,8 @@ const styles = StyleSheet.create({
     },
     imageStyle: {
         resizeMode: 'contain',
-        width: '45%',
-        height: '50%',
+        width: width * 0.45,
+        height: width * 0.5,
     },
     emptyText: {
         fontSize: 24,

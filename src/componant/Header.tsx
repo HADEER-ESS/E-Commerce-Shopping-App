@@ -2,13 +2,18 @@ import { useNavigation } from '@react-navigation/native'
 import React, { useState } from 'react'
 import { Image, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native'
 import { useTheme } from '../provider/ThemeProvider'
+import { width } from '../constant/styles'
+import { RootStackParamList } from '../stacks/RootStack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 type headerProps = {
     cartCount: number
 }
 
+type CartNavigationProp = NativeStackNavigationProp<RootStackParamList, 'cart'>
+
 const Header = ({ cartCount }: headerProps) => {
-    const navigation = useNavigation()
+    const navigation = useNavigation<CartNavigationProp>()
     const { toggleTheme, mode, theme } = useTheme()
     return (
         <View style={styles.headerContainer}>
@@ -43,8 +48,8 @@ const styles = StyleSheet.create({
     },
     imageStyle: {
         resizeMode: 'contain',
-        width: 35,
-        height: 45
+        width: width * 0.1,
+        height: width * 0.1
     },
     floatingCartCountView: {
         position: 'absolute',

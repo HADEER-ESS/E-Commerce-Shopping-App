@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
-import { Dimensions, FlatList, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { Products } from '../data/products'
-import { createGlobalStyle } from '../constant/styles'
-import { COLOR } from '../constant/Colors'
+import { createGlobalStyle, width } from '../constant/styles'
 import SpicificationCard from '../componant/SpicificationCard'
 import UpdateCountBtn from '../componant/UpdateCountBtn'
 import ActionBtn from '../componant/ActionBtn'
@@ -10,7 +9,6 @@ import { useCart } from '../provider/CartProvider'
 import { useTheme } from '../provider/ThemeProvider'
 import { RouteProp } from '@react-navigation/native'
 import { RootStackParamList } from '../stacks/RootStack'
-import detailsController from '../controller/detailsController'
 import ProductCarousel from '../componant/ProductCarousel'
 
 
@@ -88,7 +86,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginVertical: 16,
-        width: '90%',
+        width: width * 0.9,
     },
 
 })

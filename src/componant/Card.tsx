@@ -1,10 +1,10 @@
 import React from 'react'
-import { Dimensions, Image, ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { COLOR } from '../constant/Colors'
+import { Image, ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { useTheme } from '../provider/ThemeProvider'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../stacks/RootStack'
+import { width } from '../constant/styles'
 
 type productProps = {
     id: number,
@@ -14,7 +14,6 @@ type productProps = {
     description: string
 }
 
-const width = Dimensions.get('screen').width
 const ITEM_WIDTH = (width / 2) - 16
 type HomeNavigationProp = NativeStackNavigationProp<RootStackParamList, 'home_catalog'>
 
@@ -49,10 +48,11 @@ const styles = StyleSheet.create({
         borderWidth: 2,
     },
     imageStyle: {
-        width: "100%",
+        width: width * 0.4,
         height: width * 0.4,
         resizeMode: "contain",
         borderRadius: 8,
+        alignSelf: 'center'
     },
     mainTextStyle: {
         fontSize: 18,
