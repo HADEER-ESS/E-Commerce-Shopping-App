@@ -6,6 +6,7 @@ import ActionBtn from '../componant/ActionBtn'
 import { useNavigation } from '@react-navigation/native'
 import { useCart } from '../provider/CartProvider'
 import { useTheme } from '../provider/ThemeProvider'
+import EmptyStateScreen from '../componant/EmptyStateScreen'
 
 const CartScreen = () => {
 
@@ -22,19 +23,27 @@ const CartScreen = () => {
 
     return (
         <View style={MainStyles.screenContainer}>
-            <FlatList
-                data={cartData}
-                keyExtractor={(item) => `${item?.name} ${item?.id}`}
-                renderItem={({ item, index }) => <CartCardProduct product={item} />}
-            />
-            <View style={styles.staticSectionContainer}>
-                <Text style={MainStyles.MainTitleStle}>Total Items : {totalProductCount}</Text>
-                <Text style={MainStyles.MainTitleStle}>Total Price : {totalProductPrice} EGP</Text>
-                <View style={styles.actionBtnContainer}>
-                    <ActionBtn text={"Add items"} fun={() => navigation.goBack()} />
-                    <ActionBtn text={"Buy now"} fun={handleClearCart} />
-                </View>
-            </View>
+            {
+                cartData.length > 0 ?
+                    <>
+                        <FlatList
+                            data={cartData}
+                            keyExtractor={(item) => `${item?.name} ${item?.id}`}
+                            renderItem={({ item, index }) => <CartCardProduct product={item} />}
+                        />
+                        <View style={styles.staticSectionContainer}>
+                            <Text style={MainStyles.MainTitleStle}>Total Items : {totalProductCount}</Text>
+                            <Text style={MainStyles.MainTitleStle}>Total Price : {totalProductPrice} EGP</Text>
+                            <View style={styles.actionBtnContainer}>
+                                <ActionBtn text={"Add items"} fun={() => navigation.goBack()} />
+                                <ActionBtn text={"Buy now"} fun={handleClearCart} />
+                            </View>
+                        </View>
+                    </>
+                    :
+                    <EmptyStateScreen />
+            }
+
         </View>
     )
 }

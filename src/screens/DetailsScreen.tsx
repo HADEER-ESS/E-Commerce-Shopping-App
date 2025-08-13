@@ -8,11 +8,18 @@ import UpdateCountBtn from '../componant/UpdateCountBtn'
 import ActionBtn from '../componant/ActionBtn'
 import { useCart } from '../provider/CartProvider'
 import { useTheme } from '../provider/ThemeProvider'
+import { RouteProp } from '@react-navigation/native'
+import { RootStackParamList } from '../stacks/RootStack'
 
 const width = Dimensions.get("screen").width
+type DetailsRouteParam = RouteProp<RootStackParamList, 'details'>
 
 
-const DetailsScreen = ({ route }: any) => {
+type screenProps = {
+    route: DetailsRouteParam
+}
+
+const DetailsScreen = ({ route }: screenProps) => {
     const { product_id } = route.params
     const product = Products.find((pro) => pro.id === product_id)
     const { isExistProduct, isProductExist, singleProductCount, incrementAddCartItem, decrementRemoveCartItem } = useCart()

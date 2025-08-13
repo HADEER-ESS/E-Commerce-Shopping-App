@@ -3,6 +3,8 @@ import { Dimensions, Image, ImageSourcePropType, StyleSheet, Text, TouchableOpac
 import { COLOR } from '../constant/Colors'
 import { useNavigation } from '@react-navigation/native'
 import { useTheme } from '../provider/ThemeProvider'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { RootStackParamList } from '../stacks/RootStack'
 
 type productProps = {
     id: number,
@@ -13,10 +15,11 @@ type productProps = {
 }
 
 const width = Dimensions.get('screen').width
+type HomeNavigationProp = NativeStackNavigationProp<RootStackParamList, 'home_catalog'>
 
 const Card = ({ id, image, name, price, description }: productProps) => {
     const { theme } = useTheme()
-    const navigation = useNavigation()
+    const navigation = useNavigation<HomeNavigationProp>()
 
 
     return (

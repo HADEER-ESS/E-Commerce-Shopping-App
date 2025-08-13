@@ -5,7 +5,14 @@ import DetailsScreen from '../screens/DetailsScreen'
 import CartScreen from '../screens/CartScreen'
 
 
-const Stack = createNativeStackNavigator()
+export type RootStackParamList = {
+    home_catalog: undefined,
+    details: { product_id: number },
+    cart: undefined
+}
+
+
+const Stack = createNativeStackNavigator<RootStackParamList>()
 
 const RootStack = () => {
     return (
