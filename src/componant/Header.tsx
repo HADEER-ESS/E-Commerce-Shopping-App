@@ -5,6 +5,7 @@ import { useTheme } from '../provider/ThemeProvider'
 import { width } from '../constant/styles'
 import { RootStackParamList } from '../stacks/RootStack'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { useCart } from '../provider/CartProvider'
 
 type headerProps = {
     cartCount: number
@@ -12,8 +13,10 @@ type headerProps = {
 
 type CartNavigationProp = NativeStackNavigationProp<RootStackParamList, 'cart'>
 
-const Header = ({ cartCount }: headerProps) => {
+
+const Header = React.memo(() => {
     const navigation = useNavigation<CartNavigationProp>()
+    const { totalProductCount } = useCart()
     const { toggleTheme, mode, theme } = useTheme()
     return (
         <View style={styles.headerContainer}>
@@ -28,12 +31,12 @@ const Header = ({ cartCount }: headerProps) => {
             <TouchableOpacity onPress={() => navigation.navigate("cart")}>
                 <Image style={styles.imageStyle} source={require("../../assets/cart.png")} />
                 <View style={[styles.floatingCartCountView, { backgroundColor: theme.primary }]}>
-                    <Text style={styles.cartCountText}>{cartCount}</Text>
+                    <Text style={styles.cartCountText}>{totalProductCount}</Text>
                 </View>
             </TouchableOpacity>
         </View>
     )
-}
+})
 
 export default Header
 
