@@ -18,6 +18,7 @@ const ProductCarousel = React.memo(({ imagesData }: CarouselProps) => {
                 horizontal
                 data={imagesData}
                 ref={carouselRef}
+                initialNumToRender={1}
                 showsHorizontalScrollIndicator={false}
                 decelerationRate={'fast'}
                 pagingEnabled

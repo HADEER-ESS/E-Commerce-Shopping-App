@@ -32,6 +32,7 @@ const CartScreen = () => {
                         <FlatList
                             data={cartData}
                             keyExtractor={(item) => `${item?.name} ${item?.id}`}
+                            initialNumToRender={5}
                             renderItem={({ item, index }) => <CartCardProduct product={item} />}
                         />
                         <View style={styles.staticSectionContainer}>

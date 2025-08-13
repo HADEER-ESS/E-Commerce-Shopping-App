@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
         paddingVertical: 16,
         marginHorizontal: 8,
-        marginVertical: 6
+        marginVertical: 12
     },
     cartImage: {
         width: width * 0.18,
