@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import React, { useState } from 'react'
+import React from 'react'
 import { Image, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native'
 import { useTheme } from '../provider/ThemeProvider'
 import { width } from '../constant/styles'
@@ -18,8 +18,8 @@ const Header = ({ cartCount }: headerProps) => {
     return (
         <View style={styles.headerContainer}>
             <Switch
-                trackColor={{ false: '#767577', true: '#81b0ff' }}
-                thumbColor={mode === 'light' ? '#f5dd4b' : '#f4f3f4'}
+                trackColor={{ false: theme.borderColor, true: theme.borderColor }}
+                thumbColor={theme.black}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleTheme}
                 value={mode === 'light'}

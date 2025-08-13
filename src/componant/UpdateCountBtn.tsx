@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { COLOR } from '../constant/Colors'
 import { useTheme } from '../provider/ThemeProvider'
 import { width } from '../constant/styles'
 
@@ -17,15 +16,19 @@ const UpdateCountBtn = ({ count, increment, decrement }: props) => {
 
     return (
         <View style={[styles.dynamicBtnContainer, { backgroundColor: theme.white, borderColor: theme.primary }]}>
-            <Text
-                onPress={decrement}
-                style={[styles.actionTextStyle, { color: theme.primary }]}
-            >-</Text>
+            <TouchableOpacity style={{ paddingHorizontal: 6 }} onPress={decrement}>
+                <Text
+                    style={[styles.actionTextStyle, { color: theme.primary }]}
+                >-</Text>
+            </TouchableOpacity>
+
             <Text style={[styles.displayTextStyle, { color: theme.primary }]}>{count}</Text>
-            <Text
-                style={[styles.actionTextStyle, { color: theme.primary }]}
-                onPress={increment}
-            >+</Text>
+            <TouchableOpacity style={{ paddingHorizontal: 6 }} onPress={increment}>
+                <Text
+                    style={[styles.actionTextStyle, { color: theme.primary }]}
+                >+</Text>
+            </TouchableOpacity>
+
         </View>
     )
 }
