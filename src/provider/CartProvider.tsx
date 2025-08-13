@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import React, { createContext, ReactNode, useContext, useState } from 'react'
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { ImageSourcePropType } from 'react-native'
 import { Products } from '../data/products'
 
@@ -32,6 +32,10 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     const [singleProductCount, setSingleProductCount] = useState<number>(0)
     const [totalProductCount, setTotalProductCount] = useState<number>(0)
     const [totalProductPrice, setTotalProductPrice] = useState<number>(0)
+
+    useEffect(() => {
+        getCartScreenData()
+    }, [])
 
 
     // Helper functions (1,2) interact directly with AsyncStorage
