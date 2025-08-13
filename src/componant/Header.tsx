@@ -7,9 +7,6 @@ import { RootStackParamList } from '../stacks/RootStack'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useCart } from '../provider/CartProvider'
 
-type headerProps = {
-    cartCount: number
-}
 
 type CartNavigationProp = NativeStackNavigationProp<RootStackParamList, 'cart'>
 

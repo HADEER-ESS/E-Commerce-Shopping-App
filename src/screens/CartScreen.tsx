@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useCart } from '../provider/CartProvider'
 import { useTheme } from '../provider/ThemeProvider'
 import EmptyStateScreen from '../componant/EmptyStateScreen'
+import HeaderBack from '../componant/HeaderBack'
 
 const CartScreen = () => {
 
@@ -26,6 +27,7 @@ const CartScreen = () => {
 
     return (
         <View style={MainStyles.screenContainer}>
+            <HeaderBack />
             {
                 cartData.length > 0 ?
                     <>

@@ -10,6 +10,7 @@ import { useTheme } from '../provider/ThemeProvider'
 import { RouteProp } from '@react-navigation/native'
 import { RootStackParamList } from '../stacks/RootStack'
 import ProductCarousel from '../componant/ProductCarousel'
+import HeaderBack from '../componant/HeaderBack'
 
 
 type DetailsRouteParam = RouteProp<RootStackParamList, 'details'>
@@ -31,6 +32,7 @@ const DetailsScreen = ({ route }: screenProps) => {
 
     return (
         <ScrollView style={MainStyles.screenContainer}>
+            <HeaderBack />
             <ProductCarousel imagesData={product?.images!!} />
             <View style={[styles.whiteDescContainer, { backgroundColor: theme.white }]}>
                 <Text style={[MainStyles.MainTitleStle, { marginVertical: 16, width: '95%' }]}>{product?.name}</Text>
