@@ -65,15 +65,10 @@ yarn start
 
 
 # Folder Structure
-assets  -> | - root /     -> App main images
-           | - products   -> application local data images
-src     -> | - componant  -> Reusable UI components
-           | - constant   -> Color Scheme and Main style
-           | - controller -> screen bussiness handling
-           | - data       -> application local data and type
-           | - provider   -> state management context methods
-           | - screens    -> App screens (Home, Details, Cart)
-           | - stack      -> App Stack Navigation
+
+
+<img width="800" height="400" alt="Screenshot from 2025-08-14 20-47-50" src="https://github.com/user-attachments/assets/21fb7a35-1616-48c4-8e6f-6db22d41ce02" />
+
 
 # Notes
 ## Home Screen
