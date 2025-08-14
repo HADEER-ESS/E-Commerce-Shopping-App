@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     },
     carouselIndicatorContainer: {
         position: 'absolute',
-        top: width / 1.8,
+        top: width / 1.37,
         left: width * 0.45,
         borderRadius: 20,
         paddingVertical: 4,

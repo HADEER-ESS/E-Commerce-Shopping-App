@@ -4,6 +4,7 @@ import { ProductsType } from "../data/productType";
 
 export default function homeController() {
     const [productArr, setProductArr] = useState<ProductsType[]>([])
+    const [isloading, setIsLoading] = useState<boolean>(false)
     const [refreshing, setRefreshing] = useState<boolean>(false)
 
     const randomProductsOrder = useCallback(() => {
@@ -19,7 +20,13 @@ export default function homeController() {
     }, [])
 
     useEffect(() => {
-        randomProductsOrder()
+        setIsLoading(true)
+        const timer = setTimeout(() => {
+            setIsLoading(false)
+            randomProductsOrder()
+        }, 500)
+
+        return () => clearTimeout(timer)
     }, [randomProductsOrder])
 
     const pullToRefreshProducts = useCallback(() => {
@@ -35,6 +42,7 @@ export default function homeController() {
     return {
         productArr,
         refreshing,
+        isloading,
         pullToRefreshProducts
     }
 }
