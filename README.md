@@ -34,7 +34,7 @@ yarn android
 
 ### iOS
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+For iOS, remember to install CocoaPods dependencies (this only needs to be run on the first clone or after updating native deps).
 
 The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
 
@@ -62,3 +62,16 @@ If everything is set up correctly, you should see your new app running in the An
 
 This is one way to run your app — you can also build it directly from Android Studio or Xcode.
 
+### Technologies
+# @react-navigation 
+to facilitate navigation between screens and send data in route
+
+# @react-native-async-storage
+handling the persistence of cart data and application theme in different application lifecycle stages
+
+# useContext (Context)
+lightweight statemanagement for a small-scale project, simpler in use with AsyncStorage to handle application state.
+In a production-scale e-commerce app, I would consider Redux Toolkit or Zustand for scalability and better middleware support.
+
+
+### Notes
