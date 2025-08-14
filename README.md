@@ -75,3 +75,16 @@ In a production-scale e-commerce app, I would consider Redux Toolkit or Zustand 
 
 
 ### Notes
+# Home Screen
+- Simulate application first-time enter screen API call using setTimeout callback.
+- Simulate pull-to-refresh using FlatList refreshController property.
+- Getting data from `STORAGE` in Map form with a constant (set, get, delete) time, and storing it at the Context state in the application run first time
+# Details Screen
+- Adding an Auto-scroll Carousel for displaying more product Images.
+- Add to Cart button, and represent the product quantity in the cart.
+- increment and decrement the products' cart quantity using `product_id`, updating data in the  Map.
+- Item added to Cart storage in `[id, quantity]` array form to reduce the memory usage, then get the remaining data by product ID.
+# Cart Screen
+- Display stored cart data by product_id, with the SUM of product quantity and cost
+- Ability to change the product quantity or even delete
+- Simulate `Success buy process` by processing the Cart data
