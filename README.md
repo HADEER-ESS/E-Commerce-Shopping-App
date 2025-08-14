@@ -1,78 +1,58 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# React Native Developer Task: E-Commerce Shopping App
+A client-side e-commerce shopping application built with **React Native**.  
+Users can browse a catalog of products, view details, add items to the cart, and simulate a checkout — all without a backend API by using mock data and local storage.
 
-# Getting Started
+# Features
+**Product Catalog**
+- Displays products with images, names, prices, and small descriptions.
+- Pull-to-refresh support with simulated API delay.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+**Product Details**
+- Carousel auto-scroll for multiple images.
+- Specifications and detailed descriptions.
+- Add Cart button with quantity control.
 
-## Step 1: Start Metro
+**Shopping Cart**
+- Add, remove, and update product quantities.
+- Cart total quantity and price calculation.
+- Persistent cart using `AsyncStorage`.
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+**Performance Optimization**
+- `Map` structure for O(1) add/remove operations.
+- `FlastList` for products renders at the Home and Cart screens.
+- Efficient re-renders using `useCallback` and memoized components.
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+**Dark Mode**
+- User can toggle between light and dark themes.
+- Theme preference persisted in `AsyncStorage`.
 
-```sh
-# Using npm
-npm start
 
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on the first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
 
 # Technologies
-## @react-navigation 
-to facilitate navigation between screens and send data in route
+**React Native CLI** 
+- for full native access and customization.
+  
+**React Navigation**
+- smooth navigation between screens with data passing.
 
-## @react-native-async-storage
-handling the persistence of cart data and application theme in different application lifecycle stages
+**AsyncStorage**
+- persistent storage for cart and theme state.
 
-## useContext (Context)
-lightweight statemanagement for a small-scale project, simpler in use with AsyncStorage to handle application state.
-In a production-scale e-commerce app, I would consider Redux Toolkit or Zustand for scalability and better middleware support.
+**React Context**
+- lightweight state management for small-scale projects.
+- **Note** Avoided Redux/Zustand due to project scale. In production, Redux Toolkit or Zustand could be introduced for scalability.
 
+
+# Folder Structure
+assets  -> | - root /     -> App main images
+           | - products   -> application local data images
+src     -> | - componant  -> Reusable UI components
+           | - constant   -> Color Scheme and Main style
+           | - controller -> screen bussiness handling
+           | - data       -> application local data and type
+           | - provider   -> state management context methods
+           | - screens    -> App screens (Home, Details, Cart)
+           | - stack      -> App Stack Navigation
 
 # Notes
 ## Home Screen
