@@ -3,13 +3,17 @@ A client-side e-commerce shopping application built with **React Native**.
 Users can browse a catalog of products, view details, add items to the cart, and simulate a checkout — all without a backend API by using mock data and local storage.
 
 # Setup and Run
+```sh
+# cloning project
+git clone https://github.com/HADEER-ESS/E-Commerce-Shopping-App.git
+```
 **Install Dependencies**
 ```sh
 # Using npm
-npm start
+npm install
 
 # OR using Yarn
-yarn start
+yarn install
 ```
 
 **Run Application**
