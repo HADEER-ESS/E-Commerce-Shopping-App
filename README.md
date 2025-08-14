@@ -62,29 +62,29 @@ If everything is set up correctly, you should see your new app running in the An
 
 This is one way to run your app — you can also build it directly from Android Studio or Xcode.
 
-### Technologies
-# @react-navigation 
+# Technologies
+## @react-navigation 
 to facilitate navigation between screens and send data in route
 
-# @react-native-async-storage
+## @react-native-async-storage
 handling the persistence of cart data and application theme in different application lifecycle stages
 
-# useContext (Context)
+## useContext (Context)
 lightweight statemanagement for a small-scale project, simpler in use with AsyncStorage to handle application state.
 In a production-scale e-commerce app, I would consider Redux Toolkit or Zustand for scalability and better middleware support.
 
 
-### Notes
-# Home Screen
+# Notes
+## Home Screen
 - Simulate application first-time enter screen API call using setTimeout callback.
 - Simulate pull-to-refresh using FlatList refreshController property.
 - Getting data from `STORAGE` in Map form with a constant (set, get, delete) time, and storing it at the Context state in the application run first time
-# Details Screen
+## Details Screen
 - Adding an Auto-scroll Carousel for displaying more product Images.
 - Add to Cart button, and represent the product quantity in the cart.
 - increment and decrement the products' cart quantity using `product_id`, updating data in the  Map.
 - Item added to Cart storage in `[id, quantity]` array form to reduce the memory usage, then get the remaining data by product ID.
-# Cart Screen
+## Cart Screen
 - Display stored cart data by product_id, with the SUM of product quantity and cost
 - Ability to change the product quantity or even delete
 - Simulate `Success buy process` by processing the Cart data
