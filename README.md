@@ -2,6 +2,27 @@
 A client-side e-commerce shopping application built with **React Native**.  
 Users can browse a catalog of products, view details, add items to the cart, and simulate a checkout — all without a backend API by using mock data and local storage.
 
+# Setup and Run
+**Install Dependencies**
+```sh
+# Using npm
+npm start
+
+# OR using Yarn
+yarn start
+```
+
+**Run Application**
+```sh
+#Using npm
+- npm run android / npm run ios (open emulator/simulator and install the app)
+- npm start ( start the Metro and Dev server)
+
+# Using yarn
+- yarn android / yarn ios (open emulator/simulator and install the app)
+- yarn start ( start the metro and Dev server)
+```
+
 # Features
 **Product Catalog**
 - Displays products with images, names, prices, and small descriptions.
